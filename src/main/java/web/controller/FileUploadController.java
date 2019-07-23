@@ -1,13 +1,16 @@
 package web.controller;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.python.util.PythonInterpreter;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -59,5 +62,16 @@ public class FileUploadController {
 		return map;
 
 	}
-
+//	private void imgPredict(String imgPath) {
+//		PythonInterpreter interp;		
+//		try {
+//			        
+//		interp = new PythonInterpreter();				
+//		interp.execfile(imgPath);
+//		interp.exec("print(sum(7,8))");
+//		
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//	}
 }
