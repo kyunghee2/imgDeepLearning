@@ -1,16 +1,10 @@
-import PIL.Image as pilimg
+import cv2
 import numpy as np
-import matplotlib.pyplot as plt
-
 
 #def imgTest(imgpath): 
-imgpath = "C:/python_ML/img/7.png"
-      
-im = pilimg.open(imgpath)
- 
-pix = np.array(im)
-    
-print(pix.shape)
+imgpath = "C:/Users/student/workspace_python/imgDeepLearning/src/main/webapp/upload/7.png"
+imgBGR = cv2.imread(imgpath)
 
-plt.imshow(pix, cmap="Greys", interpolation="nearest")
-plt.show()
+img_numpy = np.array(imgBGR, 'uint8')
+imgGRAY = cv2.cvtColor(img_numpy, cv2.COLOR_BGR2GRAY)
+print(imgGRAY)
