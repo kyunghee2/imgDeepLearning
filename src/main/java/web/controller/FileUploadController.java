@@ -71,9 +71,13 @@ public class FileUploadController {
 		file = ResourceUtils.getFile("classpath:jython/imgPredict.py");
 		
 		System.out.println(">>"+file.getPath());
-		Process p = Runtime.getRuntime().exec("C:\\Users\\student\\AppData\\Local\\Programs\\Python\\Python36\\python.exe "+file.getPath());
-		BufferedReader in = new BufferedReader(new InputStreamReader(p.getInputStream()));
-		String ret = in.readLine();
-		System.out.println("value is : "+ret);
+		Process p = Runtime.getRuntime().exec("C:\\ProgramData\\Anaconda3\\python.exe "+file.getPath());
+		
+		BufferedReader bfr = new BufferedReader(new InputStreamReader(p.getInputStream()));
+		String line = "";
+		while((line = bfr.readLine()) != null) {
+			System.out.println(line);
+		}
+		
 	}
 }
