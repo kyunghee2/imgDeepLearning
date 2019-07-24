@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 
 #def imgTest(imgpath): 
-imgpath = "C:/Users/student/workspace_python/imgDeepLearning/src/main/webapp/upload/7.png"
+imgpath = "C:/python_ML/img/7.png"
 imgBGR = cv2.imread(imgpath)
 
 img_numpy = np.array(imgBGR, 'uint8')
