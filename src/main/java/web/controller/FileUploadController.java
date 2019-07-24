@@ -57,7 +57,7 @@ public class FileUploadController {
 			imgPredict(f.getPath());
 			System.out.println("업로드 완료");
 			map.put("result", 1);
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			map.put("result", 0);
@@ -66,18 +66,21 @@ public class FileUploadController {
 		return map;
 
 	}
+
 	private void imgPredict(String imgPath) throws Exception {
 		File file;
 		file = ResourceUtils.getFile("classpath:jython/imgPredict.py");
-		
-		System.out.println(">>"+file.getPath());
-		Process p = Runtime.getRuntime().exec("C:\\ProgramData\\Anaconda3\\python.exe "+file.getPath());
-		
+
+		System.out.println(">>" + file.getPath());
+		String[] cmd = { "C:\\\\ProgramData\\\\Anaconda3\\\\python.exe", file.getPath(), imgPath };
+
+		Process p = Runtime.getRuntime().exec(cmd);
+
 		BufferedReader bfr = new BufferedReader(new InputStreamReader(p.getInputStream()));
 		String line = "";
-		while((line = bfr.readLine()) != null) {
+		while ((line = bfr.readLine()) != null) {
 			System.out.println(line);
 		}
-		
+
 	}
 }

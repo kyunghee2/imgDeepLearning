@@ -1,7 +1,8 @@
 import cv2
+import sys
 
 #def imgTest(imgpath): 
-imgpath = "C:/python_ML/img/7.png"
+imagePath = "C:/python_ML/img/7.png"
 
 
 gray = cv2.imread(imagePath, cv2.IMREAD_GRAYSCALE)
