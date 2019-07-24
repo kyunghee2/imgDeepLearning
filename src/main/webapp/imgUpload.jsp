@@ -8,6 +8,13 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <title>이미지 업로드</title>
+<style type="text/css">
+.result {
+	font-size: 20px;
+	font-weight: bold;
+    color: blue;
+}
+</style>
 <script type="text/javascript">
 	function submitForm() {
 		var fd = new FormData(document.getElementById("fileinfo"));
@@ -19,11 +26,11 @@
 			processData : false,
 			contentType : false
 		}).done(function(data) {
-			//console.log(data);
-			if(data.result==1){
-				alert("업로드 성공");
+			console.log(data);
+			if(data.status=="1"){
+				$("#resultMsg").html("예측결과 : "+data.resultMsg);
 			}else{
-				alert("업로드 실패");
+				alert("예측 실패");
 			}
 		});
 		return false;
@@ -40,7 +47,8 @@
 			<input type="file" class="form-control-file" id="file" name="file" required>
 		</div>
 		<br>
-		<button type="submit">이미지 등록</button>
+		<button type="submit">이미지 예측하기</button><br><br>
+		<span id="resultMsg"></span>
 	</form>
 </body>
 </html>

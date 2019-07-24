@@ -25,8 +25,8 @@ public class FileUploadController {
 
 	@RequestMapping(value = "/api/imgupload.do", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Integer> imgUpload(@RequestParam("file") MultipartFile file, HttpServletRequest request) {
-		Map<String, Integer> map = new HashMap<String, Integer>();
+	public Map<String, String> imgUpload(@RequestParam("file") MultipartFile file, HttpServletRequest request) {
+		Map<String, String> map = new HashMap<String, String>();
 		String fileName = file.getOriginalFilename();
 		String detailpath = "/upload/";
 
@@ -54,33 +54,37 @@ public class FileUploadController {
 
 			file.transferTo(f);
 			System.out.println(f.getPath());
-			imgPredict(f.getPath());
+			String msg = imgPredict(f.getPath());
 			System.out.println("업로드 완료");
-			map.put("result", 1);
+			map.put("status", "1");
+			map.put("resultMsg", msg);
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			map.put("result", 0);
+			map.put("status", "0");
 		}
 
 		return map;
 
 	}
 
-	private void imgPredict(String imgPath) throws Exception {
+	private String imgPredict(String imgPath) throws Exception {
 		File file;
 		file = ResourceUtils.getFile("classpath:jython/imgPredict.py");
+		String model_path = ResourceUtils.getFile("classpath:model").getPath();
 
 		System.out.println(">>" + file.getPath());
-		String[] cmd = { "C:\\\\ProgramData\\\\Anaconda3\\\\python.exe", file.getPath(), imgPath };
+		String[] cmd = { "C:\\\\ProgramData\\Anaconda3\\python.exe", file.getPath(),model_path, imgPath };
 
 		Process p = Runtime.getRuntime().exec(cmd);
 
 		BufferedReader bfr = new BufferedReader(new InputStreamReader(p.getInputStream()));
 		String line = "";
+		StringBuilder sb = new StringBuilder();
 		while ((line = bfr.readLine()) != null) {
 			System.out.println(line);
+			sb.append(line);
 		}
-
+		return sb.toString();
 	}
 }

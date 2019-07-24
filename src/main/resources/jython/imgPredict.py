@@ -1,16 +1,18 @@
 # import cv2
 import sys
+import numpy as np
 import tensorflow as tf
 import pandas as pd
-import numpy as np
+
 from PIL import Image
 import matplotlib.pyplot as plt
 from skimage import io, color
 
-def imgTest(imagePath):   
+def imgTest(modelPath,imagePath):  
+    
     sess = tf.InteractiveSession()
-    new_saver = tf.train.import_meta_graph("./model/dnn.ckpt.meta")
-    new_saver.restore(sess, "./model/dnn.ckpt")
+    new_saver = tf.train.import_meta_graph(modelPath + "/dnn.ckpt.meta")
+    new_saver.restore(sess, modelPath + "/dnn.ckpt")
     
     tf.get_default_graph()
     
@@ -27,20 +29,15 @@ def imgTest(imagePath):
    
     plt.imshow(lina_gray, cmap = "Greys", interpolation="nearest")
    
-    plt.show()
+    #plt.show()
     
     pix = lina_gray.reshape(-1,784)
     
     result = sess.run(tf.argmax(H,1), 
                      feed_dict={X:pix,drop_rate:1})
-    print(result)
+    print(result[0])
     
-# def imgTest(imagePath):    
-#     gray = cv2.imread(imagePath, cv2.IMREAD_GRAYSCALE)
-#     gray = cv2.resize(255-gray,(28,28))
-#     test_img = gray.flatten()/255.0
-#     test_img = test_img.reshape((-1,28,28,1))
-# 
-#     print(test_img)
+    
+imgTest(sys.argv[1],sys.argv[2])
+#imgTest("C:/workspace/imgDeepLearningsrc/main/resources/model","C:/workspace/imgDeepLearning/src/main/webapp/upload/7.png")
 
-imgTest(sys.argv[1])
