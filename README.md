@@ -1,4 +1,4 @@
-# DeepLearning Mini Project
+### DeepLearning Mini Project
 - 숫자 이미지 예측 프로젝트
 
 ##### 개발환경
