@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
-<h2>index.js</h2>
+<h2>Mini Project</h2>
 
 <br>
 <a href="./imgUpload.jsp">숫자 이미지 예측</a>
