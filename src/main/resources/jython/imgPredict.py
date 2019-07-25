@@ -39,5 +39,5 @@ def imgTest(modelPath,imagePath):
     
     
 imgTest(sys.argv[1],sys.argv[2])
-#imgTest("C:/workspace/imgDeepLearningsrc/main/resources/model","C:/workspace/imgDeepLearning/src/main/webapp/upload/7.png")
+#imgTest("C:/workspace/imgDeepLearning/src/main/resources/model","C:/workspace/imgDeepLearning/src/main/webapp/upload/7.png")
 
