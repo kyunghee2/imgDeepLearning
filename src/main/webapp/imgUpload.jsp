@@ -14,10 +14,16 @@
 	font-weight: bold;
     color: blue;
 }
+#img_preview{
+	width: 80px;
+}
 </style>
 <script type="text/javascript">
+	$(function() {
+		$("#file").on("change", imgReader);
+	});
 	function submitForm() {
-		var fd = new FormData(document.getElementById("fileinfo"));
+		var fd = new FormData(document.getElementById("form1"));
 
 		$.ajax({
 			url : "./api/imgupload.do",
@@ -26,7 +32,7 @@
 			processData : false,
 			contentType : false
 		}).done(function(data) {
-			console.log(data);
+			//console.log(data);
 			if(data.status=="1"){
 				$("#resultMsg").html("예측결과 : "+data.resultMsg);
 			}else{
@@ -35,16 +41,32 @@
 		});
 		return false;
 	}
+	function imgReader(e) {
+		$("#resultMsg").html("");
+		var files = e.target.files;
+		var fileArr = Array.prototype.slice.call(files);
+		
+		fileArr.forEach(function (f) {			
+			var reader = new FileReader();
+			reader.onload = function (e) {
+				$("#img_preview").attr("src", e.target.result);				
+			}
+			reader.readAsDataURL(f);
+		});
+	}
 </script>
 
 </head>
 <body>
 	<h3>이미지 deep Learning</h3>
-	<form method="post" id="fileinfo" name="fileinfo"
+	<form method="post" id="form1" name="form1"
 		enctype="multipart/form-data" onsubmit="return submitForm();">		
 		<div class="form-group">
 			<label for="img_upload">이미지 선택</label> 
-			<input type="file" class="form-control-file" id="file" name="file" required>
+			<input type="file" class="form-control-file" id="file" name="file" accept="image/*" required>
+			<div class="img">
+				<img id="img_preview" >
+			</div>			
 		</div>
 		<br>
 		<button type="submit">이미지 예측하기</button><br><br>
