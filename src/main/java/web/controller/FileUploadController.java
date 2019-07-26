@@ -42,10 +42,8 @@ public class FileUploadController {
 
 			File f = new File(path + fileName);
 
-			if (!file.isEmpty()) {
-				boolean fileexists = f.exists();
-
-				if (fileexists) {
+			if (!file.isEmpty()) {				
+				if (f.exists()) {
 					UUID uuid = UUID.randomUUID();
 					fileName = uuid.toString() + fileName;
 					f = new File(path + fileName);
